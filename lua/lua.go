@@ -264,8 +264,8 @@ func (state *State) SetMetaTableAt(index int) {
 // See https://www.lua.org/manual/5.3/manual.html#lua_gettable
 func (state *State) GetTable(index int) Type {
 	var (
-		key = state.frame().pop()
 		obj = state.get(index)
+		key = state.frame().pop()
 	)
 	val := state.gettable(obj, key, false)
 	state.frame().push(val)
@@ -281,9 +281,9 @@ func (state *State) GetTable(index int) Type {
 // See https://www.lua.org/manual/5.3/manual.html#lua_settable
 func (state *State) SetTable(index int) {
 	var (
+		obj = state.get(index)
 		val = state.frame().pop()
 		key = state.frame().pop()
-		obj = state.get(index)
 	)
 	state.settable(obj, key, val, false)
 }
@@ -351,8 +351,8 @@ func (state *State) SetIndex(index int, entry int64) {
 // See https://www.lua.org/manual/5.3/manual.html#lua_rawget
 func (state *State) RawGet(index int) Type {
 	var (
-		key = state.frame().pop()
 		obj = state.get(index)
+		key = state.frame().pop()
 	)
 	val := state.gettable(obj, key, true)
 	state.frame().push(val)
@@ -364,9 +364,9 @@ func (state *State) RawGet(index int) Type {
 // See https://www.lua.org/manual/5.3/manual.html#lua_rawset
 func (state *State) RawSet(index int) {
 	var (
+		obj = state.get(index)
 		val = state.frame().pop()
 		key = state.frame().pop()
-		obj = state.get(index)
 	)
 	state.settable(obj, key, val, true)
 }
